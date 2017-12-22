@@ -168,9 +168,9 @@ describe("JS Fundamental Drills", function () {
       ], ["user1", "user2", "user3"]
     );
     expect(increment).to.deep.equal({
-      user1: "33 years old",
-      user2: "30 years old",
-      user3: "41 years old"
+      user1: 32,
+      user2: 29,
+      user3: 40
     });
   });
   it("#movieRatings is a function that takes in 2 arguments where the first argument is the key and second argument is the value {key1: val1, key2:val2, key3:val3, etc...}", function () {
@@ -185,17 +185,17 @@ describe("JS Fundamental Drills", function () {
       "Star Wars": 9.5,
       "The Empire Strikes Back": 8,
       "Return of the Jedi": 8.6,
-      "The Fellowship of the Ring": 9.5,
-      "The Two Towers": 8,
-      "The Return of the King": 8.6,
-      "The Hobbit": 9,
-      Ghostbusters: 9.5,
-      "Napolean Dynamite": 8
+      "The Fellowship of the Ring": 9,
+      "The Two Towers": 8.9,
+      "The Return of the King": 9.4,
+      "The Hobbit": 7.8,
+      "Ghostbusters": 8.3,
+      "Napolean Dynamite": 7.5
     });
   });
   it("#sumOfAllStudents is a function that takes in an object and returns the sum of all currently enrolled students.", function () {
     var sum = func.sumOfAllStudents(nestedData.schools.devLeague.tracks);
-    expect(sum).to.deep.equal(42);
+    expect(sum).to.deep.equal(47);
   });
   it("#mapLanguageToCreator is a function that takes in 3 arguments 'data', 'createdBy', and 'year' and returns key-value pairs { name: language }.", function () {
     var mapToCreator = func.mapLanguageToCreator(

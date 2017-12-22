@@ -178,7 +178,7 @@ var languages = {
   elixir: {
     yearCreated: 2011,
     createdBy: "Jose Valim",
-    gitHubRank: undefined
+    gitHubRank: 5
   },
   ruby: {
     yearCreated: 1993,
