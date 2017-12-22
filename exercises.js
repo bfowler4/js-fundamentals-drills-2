@@ -5,8 +5,9 @@
  * @param {Object}
  * @return {Array}
  */
-
-var getAllUsernames;
+var getAllUsernames = (obj) => {
+  return Object.keys(obj.data.id).map((key) => obj.data.id[key].username);
+};
 
 /* #hometownCity
  *
@@ -16,7 +17,9 @@ var getAllUsernames;
  * @return {String}
  */
 
-var hometownCity;
+var hometownCity = (arr) => {
+  return arr[0].hometown.state.montana.city;
+};
 
 /* #usersCurrentState
  *
@@ -27,7 +30,12 @@ var hometownCity;
  * @return {Object}
  */
 
-var usersCurrentState;
+var usersCurrentState = (data, usernames) => {
+  return data.reduce((accum, curr, index) => {
+    accum[usernames[index]] = curr[1].currentLocation.state;
+    return accum;
+  }, {});
+};
 
 /* #findAdmin
  *
@@ -37,7 +45,11 @@ var usersCurrentState;
  * @return {String}
  */
 
-var findAdmin;
+var findAdmin = (obj) => {
+  return obj.data.id[Object.keys(obj.data.id).filter((value) => {
+    return obj.data.id[value].admin === true;
+  })[0]].username;
+};
 
 /* #addNewMovie
  *
@@ -49,7 +61,10 @@ var findAdmin;
  * @return {Array}
  */
 
-var addNewMovie;
+var addNewMovie = (data, id, newMovie) => {
+  data.data.id[id].favoriteMovies.push(newMovie);
+  return data.data.id[id].favoriteMovies;
+};
 
 /* #favoriteBooks
  *
@@ -59,7 +74,12 @@ var addNewMovie;
  * @return {Array}
  */
 
-var favoriteBooks;
+var favoriteBooks = (obj) => {
+  return Array(1).fill(Object.keys(obj.data.id).reduce((accum, curr) => {
+    accum[obj.data.id[curr].favoriteBook.author] = obj.data.id[curr].favoriteBook.title;
+    return accum;
+  }, {}));
+};
 
 /* #countTracks
  *
@@ -69,7 +89,9 @@ var favoriteBooks;
  * @return {Number}
  */
 
-var countTracks;
+var countTracks = (obj) => {
+  return Object.keys(obj.devLeague.tracks).length;
+};
 
 /* #fullTimeStatus
  *
@@ -80,7 +102,10 @@ var countTracks;
  * @return {Object}
  */
 
-var fullTimeStatus;
+var fullTimeStatus = (data, trackName) => {
+  data[trackName][0].fullTime.offered = true;
+  return data[trackName][0].fullTime;
+};
 
 /* #newTrack
  *
@@ -92,7 +117,10 @@ var fullTimeStatus;
  * @return {Object}
  */
 
-var newTrack;
+var newTrack = (data, array, string) => {
+  data[string] = array[0];
+  return data;
+};
 
 /* #studentCount
  *
@@ -103,17 +131,21 @@ var newTrack;
  * @return {Object}
  */
 
-var studentCount;
+var studentCount = (data, trackName) => {
+  data.tracks[trackName][0].fullTime.offered = true;
+  data.tracks[trackName][0].fullTime.currentStudents = 10;
+  return {[trackName]: data.tracks[trackName][0].fullTime};
+};
 
 module.exports = {
-  getAllUsernames: null,
-  hometownCity: null,
-  usersCurrentState: null,
-  findAdmin: null,
-  addNewMovie: null,
-  favoriteBooks: null,
-  countTracks: null,
-  newTrack: null,
-  fullTimeStatus: null,
-  studentCount: null
+  getAllUsernames: getAllUsernames,
+  hometownCity: hometownCity,
+  usersCurrentState: usersCurrentState,
+  findAdmin: findAdmin,
+  addNewMovie: addNewMovie,
+  favoriteBooks: favoriteBooks,
+  countTracks: countTracks,
+  newTrack: newTrack,
+  fullTimeStatus: fullTimeStatus,
+  studentCount: studentCount
 };
